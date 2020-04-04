@@ -1,6 +1,11 @@
 spring:
   application:
     name: gateway
+  redis:
+    host: 47.107.111.6
+    port: 6379
+    password: redismima
+    timeout: 6000ms
 server:
   port: 8080
 
@@ -13,8 +18,13 @@ eureka:
 zuul:
   routes:
     api-a:
-      path: /api/user/**
+      path: /user/**
       serviceId: PERSONNEL-MANAGE
+      sensitiveHeaders: “*”
     api-b:
-      path: /api/file/**
+      path: /file/**
       serviceId: file-manage
+      sensitiveHeaders: “*”
+ribbon:
+  ConnectTimeout: 6000
+  ReadTimeout: 6000
